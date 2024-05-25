@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="shortcut icon" href="#">
+		<title>1st Trail of 3D Model</title>
+		<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+		<script>
+			AFRAME.registerComponent('play-pause', {
+				init: function() {
+					var abc = this.el.getAttribute('class');
+					var myVideo = document.querySelector('#sun');
+					var videoControls = document.querySelector('#videoControls');
+					videoControls.addEventListener('click', function() {
+						if(abc === 'vplay') {
+							if(myVideo.paused) {
+									myVideo.play();
+							}
+							else {
+									myVideo.pause();
+							}
+						}
+					});
+				}
+			});
+  	</script>
+	</head>
+	<body>
+		<a-scene>
+			<a-entity raycaster="objects: #videoControls" cursor="rayOrigin: mouse"></a-entity>
+			
+			<a-assets>
+				<a-asset-item id="classroom" src="./gltf_3d_model/japanese_classroom/scene.gltf"></a-asset-item>
+				<video id="sun" src="./VIDEO/Alps_Dolomits.mp4" loop="true"></video>
+			</a-assets>
+
+			<a-gltf-model src="#classroom">
+				<a-plane width="6.05" height="1.685" position="1.4 0.39 -9.3" side="double">
+					
+					<a-video src="#sun" id="videoControls" class="vplay" width="6.05" height="1.685" rotation="0 0 0" position="0 0 0" play-pause>
+    			</a-video>
+					
+				</a-plane>
+			</a-gltf-model>
+			<a-camera position="1.5 0 0"></a-camera>
+		</a-scene>
+	</body>
+</html>
